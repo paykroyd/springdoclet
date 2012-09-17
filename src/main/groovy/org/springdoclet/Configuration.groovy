@@ -6,8 +6,8 @@ class Configuration {
   private static final String OPTION_STYLESHEET = '-stylesheet'
   private static final String OPTION_LINKPATH = '-linkpath'
   private static final String DEFAULT_DIRECTORY = '.'
-  private static final String DEFAULT_FILENAME = './spring-summary.html'
-  private static final String DEFAULT_STYLESHEET = './spring-summary.css'
+  private static final String DEFAULT_FILENAME = './springpad-api-endpoints.html'
+  private static final String DEFAULT_STYLESHEET = './springpad-api-endpoints.css'
   private static final String DEFAULT_LINKPATH = './'
 
   String[][] options

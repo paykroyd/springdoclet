@@ -5,7 +5,7 @@ import com.sun.javadoc.RootDoc
 import org.springdoclet.writers.StylesheetWriter
 import org.springdoclet.writers.HtmlWriter
 import org.springdoclet.collectors.RequestMappingCollector
-import org.springdoclet.collectors.ComponentCollector
+import org.springdoclet.writers.MarkdownWriter
 
 class SpringDoclet extends Doclet {
   private static Configuration config = new Configuration()
@@ -18,7 +18,8 @@ class SpringDoclet extends Doclet {
 
     new ClassProcessor().process root.classes(), collectors
 
-    new HtmlWriter().writeOutput collectors, config
+//    new HtmlWriter().writeOutput collectors, config
+    new MarkdownWriter().writeOutput collectors, config
 
     if (config.isDefaultStyleSheet()) {
       new StylesheetWriter().writeStylesheet config
@@ -28,7 +29,7 @@ class SpringDoclet extends Doclet {
   }
 
   private static getCollectors() {
-    return [ new ComponentCollector(), new RequestMappingCollector() ]
+    return [ new RequestMappingCollector() ]
   }
 
   public static int optionLength(String option) {

@@ -7,6 +7,7 @@ import org.springdoclet.Collector
 import org.springdoclet.Annotations
 import org.springdoclet.PathBuilder
 import org.springdoclet.TextUtils
+import org.springdoclet.writers.MarkdownBuilder
 
 class ComponentCollector implements Collector {
   private static String COMPONENT_TYPE = 'org.springframework.stereotype.'
@@ -28,6 +29,10 @@ class ComponentCollector implements Collector {
       componentsByType[type] = [component]
     else
       componentsByType[type] << component
+  }
+
+  void writeMarkdown(MarkdownBuilder builder, PathBuilder paths) {
+      builder.h2("Do we actually get here?")
   }
 
   void writeOutput(MarkupBuilder builder, PathBuilder paths) {
