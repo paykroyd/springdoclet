@@ -98,9 +98,9 @@ class RequestMappingCollector implements Collector {
         for (mapping in sortedMappings) {
             def path = mapping.path.toString().replaceAll('"', '')
             def text = mapping.text.toString()
-            def fullPath = mapping.httpMethodName + " " + (mapping.apiPrefix != null ? mapping.apiPrefix + path : path)
+            def fullPath = (mapping.apiPrefix != null ? mapping.apiPrefix + path : path)
 
-            builder.h2(fullPath).br()
+            builder.write("## " + mapping.httpMethodName).write(" ").code(fullPath).br()
             if (text)
                 builder.writeln(text)
 
@@ -113,25 +113,10 @@ class RequestMappingCollector implements Collector {
                     if (paramText.contains(' '))
                         paramDesc = paramText.substring(paramText.indexOf(' ') + 1)
 
-                    builder.bullet().i(paramName).write(" ").writeln(paramDesc)
+                    builder.bullet().code(paramName).write(" ").writeln(paramDesc)
                 }
                 builder.br()
             }
-
-//            if (mapping.jparams) {
-//                builder.h3("Query Params")
-//                for (param in mapping.jparams) {
-//                    def paramText = param.text().toString()
-//                    def paramName = paramText.substring(0, paramText.contains(' ') ? paramText.indexOf(' ') : paramText.length())
-//                    def paramDesc = null
-//                    if (paramText.contains(' '))
-//                        paramDesc = paramText.substring(paramText.indexOf(' ') + 1)
-//                    else
-//                        paramDesc = ""
-//                    builder.bullet().i(paramName).write(" ").writeln(paramDesc)
-//                }
-//                builder.br()
-//            }
 
             if (mapping.params.length > 0) {
                 builder.h3("Query Params")
@@ -141,7 +126,7 @@ class RequestMappingCollector implements Collector {
                     def paramDesc = ""
                     if (paramText.contains(' '))
                         paramDesc = paramText.substring(paramText.indexOf(' ') + 1)
-                    builder.bullet().i(paramName).write(" ").writeln(paramDesc)
+                    builder.bullet().code(paramName).write(" ").writeln(paramDesc)
                 }
                 builder.br()
             }
@@ -149,14 +134,14 @@ class RequestMappingCollector implements Collector {
             if (mapping.postData.length > 0) {
                 builder.h3("Post Data")
                 for (item in mapping.postData) {
-                    builder.code_block(item.text())
+                    builder.code_block(item.text(), "json")
                 }
             }
 
             if (mapping.returns.length > 0) {
                 builder.h3("Returns")
                 for (item in mapping.returns) {
-                    builder.code_block(item.text())
+                    builder.code_block(item.text(), "json")
                 }
             }
 
@@ -169,7 +154,7 @@ class RequestMappingCollector implements Collector {
                     def paramDesc = ""
                     if (paramText.contains(' '))
                         paramDesc = paramText.substring(paramText.indexOf(' ') + 1)
-                    builder.bullet().i(paramName).write(" ").writeln(paramDesc)
+                    builder.bullet().code(paramName).write(" ").writeln(paramDesc)
                 }
                 builder.br()
             }

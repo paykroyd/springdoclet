@@ -40,8 +40,8 @@ class MarkdownBuilder {
         return this
     }
 
-    def inline_code(str) {
-        this.fileWriter.write("`" + text + "`")
+    def code(str) {
+        this.fileWriter.write("`" + str + "`")
         return this
     }
 
@@ -59,6 +59,12 @@ class MarkdownBuilder {
         this.fileWriter.write("```\n" + code + "\n```\n")
         return this
     }
+
+    def code_block(code, language) {
+        this.fileWriter.write("```" + language + "\n" + code + "\n```\n")
+        return this
+    }
+
 
     def br() {
         this.fileWriter.write("\n")
